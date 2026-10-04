@@ -18,6 +18,17 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  image_path: assets/icon/app_icon.png
+  android: true
+  adaptive_icon_foreground: assets/icon/app_icon.png
+  adaptive_icon_foreground_inset: 0
+  adaptive_icon_background: "#D17438"
+  ios: true
+  remove_alpha_ios: true
+  background_color_ios: "#D17438"
 
 flutter:
   uses-material-design: true
