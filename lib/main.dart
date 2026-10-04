@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourist_guide_app/theme/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tourist Guide',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Montserrat',
+        scaffoldBackgroundColor: AppColors.background,
+        colorScheme: const ColorScheme.light(
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
+          surface: AppColors.background,
+          onSurface: AppColors.text,
+        ),
       ),
       home: const HomeScreen(),
     );
