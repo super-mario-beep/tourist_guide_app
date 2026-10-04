@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tourist_guide_app/theme/app_colors.dart';
+import 'package:tourist_guide_app/core/theme/app_colors.dart';
 
 class TopBar extends StatelessWidget implements PreferredSizeWidget {
   const TopBar({super.key, required this.title});

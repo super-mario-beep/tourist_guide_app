@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tourist_guide_app/theme/app_colors.dart';
-import 'package:tourist_guide_app/widgets/place_card.dart';
+import 'package:tourist_guide_app/core/theme/app_colors.dart';
+import 'package:tourist_guide_app/core/widgets/place_card.dart';
 
 // Temporary mock data until the sights API is connected.
 const _places = [

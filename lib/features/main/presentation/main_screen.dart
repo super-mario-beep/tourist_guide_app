@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tourist_guide_app/screens/home_screen.dart';
-import 'package:tourist_guide_app/screens/profile_screen.dart';
-import 'package:tourist_guide_app/widgets/bottom_nav_bar.dart';
+import 'package:tourist_guide_app/features/places/presentation/home_screen.dart';
+import 'package:tourist_guide_app/features/profile/presentation/profile_screen.dart';
+import 'package:tourist_guide_app/core/widgets/bottom_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

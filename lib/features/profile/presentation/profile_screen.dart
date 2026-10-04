@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:tourist_guide_app/theme/app_colors.dart';
-import 'package:tourist_guide_app/widgets/primary_button.dart';
-
-// Temporary mock user until authentication is connected.
-const _name = 'Helena Weasley';
-const _email = 'helena.weasley@gmail.com';
-const _avatarUrl = 'https://randomuser.me/api/portraits/women/44.jpg';
+import 'package:tourist_guide_app/core/di/service_locator.dart';
+import 'package:tourist_guide_app/core/theme/app_colors.dart';
+import 'package:tourist_guide_app/core/widgets/primary_button.dart';
+import 'package:tourist_guide_app/features/auth/presentation/sign_in_screen.dart';
+import 'package:tourist_guide_app/features/profile/presentation/profile_view_model.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
+  Future<void> _signOut(BuildContext context, ProfileViewModel viewModel) async {
+    await viewModel.signOut();
+    if (!context.mounted) return;
+
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const SignInScreen()),
+      (_) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final viewModel = ProfileViewModel(getIt());
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -31,29 +41,32 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              const _Avatar(url: _avatarUrl),
+              const _Avatar(),
               const SizedBox(height: 12),
-              const Text(
-                _name,
+              Text(
+                viewModel.displayName,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.text,
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 4),
-              const Text(
-                _email,
+              Text(
+                viewModel.email,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.text,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               const Spacer(),
-              PrimaryButton(label: 'Sign out', onPressed: () {}),
+              PrimaryButton(
+                label: 'Sign out',
+                onPressed: () => _signOut(context, viewModel),
+              ),
             ],
           ),
         ),
@@ -63,12 +76,9 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class _Avatar extends StatelessWidget {
-  const _Avatar({required this.url});
-
-  final String url;
+  const _Avatar();
 
   static const _size = 130.0;
-  static const _placeholderColor = Color(0xFFD9D9D9);
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +87,7 @@ class _Avatar extends StatelessWidget {
       height: _size,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
+        color: Color(0xFFD9D9D9),
         boxShadow: [
           BoxShadow(
             color: Color(0x40000000),
@@ -85,16 +96,7 @@ class _Avatar extends StatelessWidget {
           ),
         ],
       ),
-      child: ClipOval(
-        child: Image.network(
-          url,
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const ColoredBox(
-            color: _placeholderColor,
-            child: Icon(Icons.person, size: 72, color: Colors.white),
-          ),
-        ),
-      ),
+      child: const Icon(Icons.person, size: 72, color: Colors.white),
     );
   }
 }

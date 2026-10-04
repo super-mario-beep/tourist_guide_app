@@ -1,8 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:tourist_guide_app/screens/main_screen.dart';
+import 'package:tourist_guide_app/core/di/service_locator.dart';
+import 'package:tourist_guide_app/features/auth/presentation/sign_in_screen.dart';
+import 'package:tourist_guide_app/features/auth/presentation/splash_view_model.dart';
+import 'package:tourist_guide_app/features/main/presentation/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,22 +13,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Timer? _timer;
+  final _viewModel = SplashViewModel(getIt());
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const MainScreen()),
-      );
-    });
+    _redirect();
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
+  Future<void> _redirect() async {
+    final isSignedIn = await _viewModel.isSignedIn();
+    if (!mounted) return;
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) =>
+            isSignedIn ? const MainScreen() : const SignInScreen(),
+      ),
+    );
   }
 
   @override

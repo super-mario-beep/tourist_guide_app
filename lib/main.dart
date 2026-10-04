@@ -1,8 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tourist_guide_app/screens/splash_screen.dart';
-import 'package:tourist_guide_app/theme/app_colors.dart';
+import 'package:tourist_guide_app/core/di/service_locator.dart';
+import 'package:tourist_guide_app/core/theme/app_colors.dart';
+import 'package:tourist_guide_app/features/auth/presentation/splash_screen.dart';
+import 'package:tourist_guide_app/firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  setupServiceLocator();
   runApp(const MyApp());
 }
 
