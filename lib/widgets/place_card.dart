@@ -30,6 +30,7 @@ class PlaceCard extends StatelessWidget {
   static const _radius = BorderRadius.all(Radius.circular(20));
   static const _imageRadius = BorderRadius.all(Radius.circular(15));
   static const _placeholderColor = Color(0xFFD9D9D9);
+  static const _starColor = Color(0xFFFFD600);
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +147,7 @@ class PlaceCard extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          '${latitude.toStringAsFixed(4)}, ${longitude.toStringAsFixed(4)}',
+          '$latitude, $longitude',
           style: const TextStyle(
             color: Colors.white,
             fontSize: 12,
@@ -167,7 +168,7 @@ class PlaceCard extends StatelessWidget {
           child: Icon(
             Icons.star,
             size: 28,
-            color: index < rating ? Colors.white : _placeholderColor,
+            color: index < rating ? _starColor : _placeholderColor,
           ),
         );
       }),
