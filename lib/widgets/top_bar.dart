@@ -6,9 +6,6 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
   const TopBar({super.key, required this.title});
 
   final String title;
-
-  // Figma's 90px includes the status bar, so only the toolbar part is set
-  // here; SafeArea adds the device's real status bar height on top.
   static const _height = kToolbarHeight;
 
   @override
