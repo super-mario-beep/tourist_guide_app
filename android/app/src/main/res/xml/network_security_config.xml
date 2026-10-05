@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- The sights API is served over plain HTTP; allow it only for that host. -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">144.91.87.48</domain>
+    </domain-config>
+</network-security-config>

@@ -98,20 +98,14 @@ class PlaceCard extends StatelessWidget {
       child: SizedBox(
         width: 135,
         height: _height - _padding * 2,
-        child: imageUrl == null
+        child: imageUrl == null || imageUrl!.isEmpty
             ? placeholder
             : Image.network(
                 imageUrl!,
                 fit: BoxFit.cover,
                 loadingBuilder: (_, child, progress) =>
                     progress == null ? child : placeholder,
-                errorBuilder: (_, _, _) => const ColoredBox(
-                  color: _placeholderColor,
-                  child: Image(
-                    image: AssetImage('assets/images/error_image.png'),
-                    fit: BoxFit.contain,
-                  ),
-                ),
+                errorBuilder: (_, _, _) => placeholder,
               ),
       ),
     );
