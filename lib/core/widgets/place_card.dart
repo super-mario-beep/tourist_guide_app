@@ -13,6 +13,7 @@ class PlaceCard extends StatelessWidget {
     this.isFavorite = false,
     this.onFavoritePressed,
     this.onTap,
+    this.heroTag,
   });
 
   final String name;
@@ -24,6 +25,9 @@ class PlaceCard extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback? onFavoritePressed;
   final VoidCallback? onTap;
+
+  /// When set, the image animates into a matching [Hero] on the next screen.
+  final Object? heroTag;
 
   static const _height = 132.0;
   static const _padding = 14.0;
@@ -93,7 +97,7 @@ class PlaceCard extends StatelessWidget {
   Widget _buildImage() {
     const placeholder = ColoredBox(color: _placeholderColor);
 
-    return ClipRRect(
+    final image = ClipRRect(
       borderRadius: _imageRadius,
       child: SizedBox(
         width: 135,
@@ -109,6 +113,8 @@ class PlaceCard extends StatelessWidget {
               ),
       ),
     );
+
+    return heroTag == null ? image : Hero(tag: heroTag!, child: image);
   }
 
   Widget _buildDetails() {

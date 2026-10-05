@@ -1,26 +1,28 @@
 import 'package:flutter/foundation.dart';
+import 'package:tourist_guide_app/features/favorites/domain/favorites_repository.dart';
 import 'package:tourist_guide_app/features/places/domain/place.dart';
 import 'package:tourist_guide_app/features/places/domain/places_repository.dart';
 
 enum HomeStatus { loading, error, empty, success }
 
 class HomeViewModel extends ChangeNotifier {
-  HomeViewModel(this._placesRepository);
+  HomeViewModel(this._placesRepository, this._favoritesRepository);
 
   final PlacesRepository _placesRepository;
+  final FavoritesRepository _favoritesRepository;
 
   HomeStatus status = HomeStatus.loading;
   List<Place> places = [];
 
-  // Kept in memory for now; local storage comes with the Favorites feature.
-  final Set<int> _favoriteIds = {};
-
-  bool isFavorite(Place place) => _favoriteIds.contains(place.id);
+  bool isFavorite(Place place) => _favoritesRepository.isFavorite(place.id);
 
   void toggleFavorite(Place place) {
-    if (!_favoriteIds.remove(place.id)) _favoriteIds.add(place.id);
+    _favoritesRepository.toggle(place.id);
     notifyListeners();
   }
+
+  /// Redraws the list after favorites changed on another screen.
+  void refreshFavorites() => notifyListeners();
 
   /// [showLoading] is false for pull-to-refresh, which has its own indicator.
   Future<void> loadPlaces({bool showLoading = true}) async {

@@ -5,6 +5,7 @@ import 'package:tourist_guide_app/core/widgets/loading_indicator.dart';
 import 'package:tourist_guide_app/core/widgets/place_card.dart';
 import 'package:tourist_guide_app/core/widgets/status_message.dart';
 import 'package:tourist_guide_app/features/places/presentation/home_view_model.dart';
+import 'package:tourist_guide_app/features/places/presentation/place_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _viewModel = HomeViewModel(getIt());
+  final _viewModel = HomeViewModel(getIt(), getIt());
 
   @override
   void initState() {
@@ -26,6 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _viewModel.dispose();
     super.dispose();
+  }
+
+  Future<void> _openDetails(int placeId) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => PlaceDetailsScreen(placeId: placeId)),
+    );
+    // The heart may have been toggled on the details screen.
+    _viewModel.refreshFavorites();
   }
 
   @override
@@ -97,6 +106,8 @@ class _HomeScreenState extends State<HomeScreen> {
               imageUrl: place.imageUrl,
               isFavorite: _viewModel.isFavorite(place),
               onFavoritePressed: () => _viewModel.toggleFavorite(place),
+              heroTag: placeImageHeroTag(place.id),
+              onTap: () => _openDetails(place.id),
             );
           },
         ),

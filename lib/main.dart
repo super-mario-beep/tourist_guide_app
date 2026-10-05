@@ -8,7 +8,7 @@ import 'package:tourist_guide_app/firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  setupServiceLocator();
+  await setupServiceLocator();
   runApp(const MyApp());
 }
 
