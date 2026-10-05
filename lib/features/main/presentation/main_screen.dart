@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tourist_guide_app/core/widgets/bottom_nav_bar.dart';
+import 'package:tourist_guide_app/features/favorites/presentation/favorites_screen.dart';
 import 'package:tourist_guide_app/features/places/presentation/home_screen.dart';
 import 'package:tourist_guide_app/features/profile/presentation/profile_screen.dart';
-import 'package:tourist_guide_app/core/widgets/bottom_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -12,15 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static const _favoritesTab = 1;
-
   int _currentIndex = 0;
-
-  void _onTabTapped(int index) {
-    // Favorites screen doesn't exist yet.
-    if (index == _favoritesTab) return;
-    setState(() => _currentIndex = index);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +26,13 @@ class _MainScreenState extends State<MainScreen> {
           index: _currentIndex,
           children: const [
             HomeScreen(),
-            SizedBox.shrink(),
+            FavoritesScreen(),
             ProfileScreen(),
           ],
         ),
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,
-          onTap: _onTabTapped,
+          onTap: (index) => setState(() => _currentIndex = index),
         ),
       ),
     );

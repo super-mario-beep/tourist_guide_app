@@ -10,8 +10,11 @@ class PlaceDetailsViewModel extends ChangeNotifier {
     PlacesRepository placesRepository,
     this._favoritesRepository,
     this._mapsLauncher,
-  ) : // Read from the local database the list saved after the API call.
-      place = placesRepository.getSavedPlace(placeId);
+  ) : // Read from the local database: the places saved after the API call,
+      // or the favorites, which stay saved even if the API dropped the place.
+      place =
+          placesRepository.getSavedPlace(placeId) ??
+          _favoritesRepository.getById(placeId);
 
   final FavoritesRepository _favoritesRepository;
   final MapsLauncher _mapsLauncher;
@@ -21,9 +24,9 @@ class PlaceDetailsViewModel extends ChangeNotifier {
   bool get isFavorite =>
       place != null && _favoritesRepository.isFavorite(place!.id);
 
-  void toggleFavorite() {
+  Future<void> toggleFavorite() async {
     if (place == null) return;
-    _favoritesRepository.toggle(place!.id);
+    await _favoritesRepository.toggle(place!);
     notifyListeners();
   }
 

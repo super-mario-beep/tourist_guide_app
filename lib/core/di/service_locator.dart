@@ -5,7 +5,7 @@ import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:tourist_guide_app/core/services/maps_launcher.dart';
 import 'package:tourist_guide_app/features/auth/data/firebase_auth_repository.dart';
 import 'package:tourist_guide_app/features/auth/domain/auth_repository.dart';
-import 'package:tourist_guide_app/features/favorites/data/in_memory_favorites_repository.dart';
+import 'package:tourist_guide_app/features/favorites/data/hive_favorites_repository.dart';
 import 'package:tourist_guide_app/features/favorites/domain/favorites_repository.dart';
 import 'package:tourist_guide_app/features/places/data/api_places_repository.dart';
 import 'package:tourist_guide_app/features/places/data/place_adapter.dart';
@@ -23,6 +23,9 @@ Future<void> setupServiceLocator() async {
   await Hive.initFlutter();
   Hive.registerAdapter(PlaceAdapter());
   final placesBox = await Hive.openBox<Place>(PlacesLocalStorage.boxName);
+  final favoritesBox = await Hive.openBox<Place>(
+    HiveFavoritesRepository.boxName,
+  );
 
   getIt
     ..registerLazySingleton<AuthRepository>(
@@ -43,7 +46,7 @@ Future<void> setupServiceLocator() async {
       () => ApiPlacesRepository(getIt(), getIt()),
     )
     ..registerLazySingleton<FavoritesRepository>(
-      InMemoryFavoritesRepository.new,
+      () => HiveFavoritesRepository(favoritesBox),
     )
     ..registerLazySingleton(MapsLauncher.new);
 }

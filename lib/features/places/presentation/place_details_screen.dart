@@ -9,14 +9,17 @@ import 'package:tourist_guide_app/core/widgets/top_bar.dart';
 import 'package:tourist_guide_app/features/places/domain/place.dart';
 import 'package:tourist_guide_app/features/places/presentation/place_details_view_model.dart';
 
-/// Shared by the list card and the details image so the image animates
-/// between the two screens.
-String placeImageHeroTag(int placeId) => 'place-image-$placeId';
-
 class PlaceDetailsScreen extends StatefulWidget {
-  const PlaceDetailsScreen({super.key, required this.placeId});
+  const PlaceDetailsScreen({
+    super.key,
+    required this.placeId,
+    required this.heroTag,
+  });
 
   final int placeId;
+
+  /// Same tag as the card image, so the image animates between screens.
+  final String heroTag;
 
   @override
   State<PlaceDetailsScreen> createState() => _PlaceDetailsScreenState();
@@ -73,7 +76,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                 child: Stack(
                   children: [
                     Hero(
-                      tag: placeImageHeroTag(place.id),
+                      tag: widget.heroTag,
                       child: SizedBox(
                         height: imageHeight,
                         width: double.infinity,
