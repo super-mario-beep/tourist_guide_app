@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-// Values come from android/app/google-services.json (Firebase project
-// tourist-guide-app-c2825). iOS needs its own app registered in the console.
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {

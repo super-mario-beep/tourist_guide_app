@@ -7,7 +7,6 @@ class ProfileViewModel {
 
   String get email => _authRepository.currentUser?.email ?? '';
 
-  /// Firebase email accounts have no name, so the part before "@" is used.
   String get displayName => email.split('@').first;
 
   Future<void> signOut() => _authRepository.signOut();

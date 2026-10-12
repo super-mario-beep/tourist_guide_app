@@ -17,8 +17,6 @@ extension SnackBarContext on BuildContext {
           margin: const EdgeInsets.fromLTRB(24, 0, 24, 24),
           clipBehavior: Clip.none,
         ),
-        // The built-in animation grows the snack bar from the bottom;
-        // it's disabled so only the slide below is visible.
         snackBarAnimationStyle: AnimationStyle.noAnimation,
       );
   }

@@ -10,7 +10,6 @@ class SignUpViewModel extends ChangeNotifier {
   bool isLoading = false;
   String? errorMessage;
 
-  /// Returns true when the account is created and the user is signed in.
   Future<bool> signUp({required String email, required String password}) async {
     isLoading = true;
     errorMessage = null;

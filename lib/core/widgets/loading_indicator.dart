@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tourist_guide_app/core/theme/app_colors.dart';
 
-/// iOS-style spinner painted with the brand gradient.
 class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator({super.key});
 

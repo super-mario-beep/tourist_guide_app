@@ -20,8 +20,6 @@ class _MainScreenState extends State<MainScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
-        // IndexedStack keeps every tab alive, so scroll position and state
-        // survive switching tabs.
         body: IndexedStack(
           index: _currentIndex,
           children: const [

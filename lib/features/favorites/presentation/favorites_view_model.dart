@@ -6,7 +6,6 @@ import 'package:tourist_guide_app/features/places/domain/place.dart';
 
 class FavoritesViewModel extends ChangeNotifier {
   FavoritesViewModel(this._favoritesRepository) {
-    // Keeps the list in sync when hearts are toggled on other screens.
     _subscription = _favoritesRepository.watchAll().listen((favorites) {
       this.favorites = favorites;
       notifyListeners();

@@ -58,8 +58,6 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     final errorColor = Theme.of(context).colorScheme.error;
 
-    // Shadow sits in its own layer so it stays behind the 60px box
-    // and doesn't stretch under the error text.
     return Stack(
       children: [
         const Positioned(

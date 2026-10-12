@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// Opens a location in the platform's default maps app:
-/// Google Maps (or any map app) on Android, Apple Maps on iOS.
 class MapsLauncher {
-  /// Returns false when no app could open the location.
   Future<bool> open({
     required double latitude,
     required double longitude,
@@ -18,7 +15,6 @@ class MapsLauncher {
 
     if (await _launch(nativeUri)) return true;
 
-    // No maps app installed: fall back to Google Maps in the browser.
     return _launch(
       Uri.https('www.google.com', '/maps/search/', {
         'api': '1',

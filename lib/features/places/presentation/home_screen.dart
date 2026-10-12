@@ -40,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListenableBuilder(
             listenable: _viewModel,
             builder: (_, _) => CustomScrollView(
-              // Lets pull-to-refresh work even when the content is short.
               physics: const AlwaysScrollableScrollPhysics(),
               slivers: [
                 const SliverPadding(

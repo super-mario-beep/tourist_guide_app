@@ -10,7 +10,6 @@ class SignInViewModel extends ChangeNotifier {
   bool isLoading = false;
   String? errorMessage;
 
-  /// Returns true when the user is signed in.
   Future<bool> signIn({required String email, required String password}) async {
     isLoading = true;
     errorMessage = null;

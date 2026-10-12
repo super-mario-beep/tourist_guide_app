@@ -1,6 +1,5 @@
 import 'package:tourist_guide_app/features/places/domain/place.dart';
 
-/// Shape of one sight as returned by `GET /sight/all`.
 class PlaceDto {
   const PlaceDto({
     required this.id,

@@ -1,8 +1,6 @@
 import 'package:hive_ce/hive_ce.dart';
 import 'package:tourist_guide_app/features/places/domain/place.dart';
 
-/// Tells Hive how to write a [Place] to disk and read it back.
-/// Fields must always be read in the same order they were written.
 class PlaceAdapter extends TypeAdapter<Place> {
   @override
   final int typeId = 0;

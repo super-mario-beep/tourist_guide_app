@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tourist_guide_app/core/theme/app_colors.dart';
 
-/// Illustration with a title and description, used for empty and error states.
 class StatusMessage extends StatelessWidget {
   const StatusMessage({
     super.key,

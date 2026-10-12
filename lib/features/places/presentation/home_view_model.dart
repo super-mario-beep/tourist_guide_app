@@ -9,7 +9,6 @@ enum HomeStatus { loading, error, empty, success }
 
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel(this._placesRepository, this._favoritesRepository) {
-    // Redraw hearts when favorites change on any screen.
     _favoritesSubscription = _favoritesRepository.watchAll().listen(
       (_) => notifyListeners(),
     );
@@ -26,7 +25,6 @@ class HomeViewModel extends ChangeNotifier {
 
   void toggleFavorite(Place place) => _favoritesRepository.toggle(place);
 
-  /// [showLoading] is false for pull-to-refresh, which has its own indicator.
   Future<void> loadPlaces({bool showLoading = true}) async {
     if (showLoading) {
       status = HomeStatus.loading;

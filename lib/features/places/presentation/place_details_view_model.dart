@@ -10,9 +10,7 @@ class PlaceDetailsViewModel extends ChangeNotifier {
     PlacesRepository placesRepository,
     this._favoritesRepository,
     this._mapsLauncher,
-  ) : // Read from the local database: the places saved after the API call,
-      // or the favorites, which stay saved even if the API dropped the place.
-      place =
+  ) : place =
           placesRepository.getSavedPlace(placeId) ??
           _favoritesRepository.getById(placeId);
 
@@ -30,7 +28,6 @@ class PlaceDetailsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Returns false when no app could open the location.
   Future<bool> openInMaps() {
     final place = this.place!;
     return _mapsLauncher.open(

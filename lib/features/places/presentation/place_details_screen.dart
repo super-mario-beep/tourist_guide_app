@@ -18,7 +18,6 @@ class PlaceDetailsScreen extends StatefulWidget {
 
   final int placeId;
 
-  /// Same tag as the card image, so the image animates between screens.
   final String heroTag;
 
   @override

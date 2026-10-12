@@ -2,8 +2,6 @@ import 'package:hive_ce/hive_ce.dart';
 import 'package:tourist_guide_app/features/favorites/domain/favorites_repository.dart';
 import 'package:tourist_guide_app/features/places/domain/place.dart';
 
-/// Stores the whole [Place], keyed by id, so favorites can be shown
-/// without the API.
 class HiveFavoritesRepository implements FavoritesRepository {
   HiveFavoritesRepository(this._box);
 

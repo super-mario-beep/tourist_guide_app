@@ -26,7 +26,6 @@ class PlaceCard extends StatelessWidget {
   final VoidCallback? onFavoritePressed;
   final VoidCallback? onTap;
 
-  /// When set, the image animates into a matching [Hero] on the next screen.
   final Object? heroTag;
 
   static const _height = 132.0;
@@ -122,7 +121,6 @@ class PlaceCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          // Keeps the name clear of the favorite icon.
           padding: const EdgeInsets.only(right: 40),
           child: Text(
             name,
